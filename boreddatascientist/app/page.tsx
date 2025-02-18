@@ -44,7 +44,9 @@ export default async function Home() {
         {scenarioText || "Failed to load scenario. Please try again later."}
       </p>
 
-      {scenarioId && <UserInputForm scenarioId={scenarioId} />}
+      {scenarioId && scenarioText && (
+        <UserInputForm scenarioId={scenarioId} scenarioText={scenarioText} />
+      )}
     </div>
   );
 }
