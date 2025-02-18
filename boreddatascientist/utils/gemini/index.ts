@@ -3,7 +3,7 @@ import { generateScenarioPrompt, evaluateAnswerPrompt } from "@/utils/gemini/pro
 
 // Initialize Gemini API
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 /**
  * Function to generate a random scenario using Gemini
@@ -24,9 +24,9 @@ export async function generateScenario(): Promise<string> {
  * @param userAnswer The user's answer to the scenario
  * @returns Evaluation response (survived or died)
  */
-export async function evaluateAnswer(userAnswer: string): Promise<string> {
+export async function evaluateAnswer(scenarioText: string, userAnswer: string): Promise<string> {
   try {
-    const prompt = evaluateAnswerPrompt(userAnswer);
+    const prompt = evaluateAnswerPrompt(scenarioText, userAnswer);
     const result = await model.generateContent(prompt);
     return result.response.text();
   } catch (error) {
